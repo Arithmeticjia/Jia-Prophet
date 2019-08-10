@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,render_template
 from flask import jsonify,request
 import pandas as pd
 import numpy as np
@@ -33,7 +33,7 @@ class Article(db.Model):
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return render_template('index.html')
 
 
 @app.route('/predict',methods=["GET", "POST"])

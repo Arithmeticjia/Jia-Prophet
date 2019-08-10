@@ -16,7 +16,7 @@ ul,ol{list-style:none;}
 select,input{vertical-align:middle;}
 select,input,textarea{font-size:12px;}
 table{border-collapse:collapse;border-spacing:0;font-size:inherit;}
-body{background:#fff url(img/bg.jpg) center 0 repeat-y fixed;background-size:cover;color:#333;padding:0;font:14px/180% verdana,'微软雅黑', sans-serif;}
+body{background:#fff url(/static/img/bg.jpg) center 0 repeat-y fixed;background-size:cover;color:#333;padding:0;font:14px/180% verdana,'微软雅黑', sans-serif;}
 h1,h2,h3,h4,h5,h6{font-size:100%;font-weight: normal;}
 
 .clearfix:after { display: block; font-size: 0; content:'\20'; clear: both; height: 0; }
@@ -32,8 +32,8 @@ blockquote,q{margin: 20px;}
 
 #wrap{width: 980px;margin: 0 auto;}
 
-.sprite{background: url(img/sprite.png) 0 -9999em no-repeat;}
-.icon{background: url(img/icon.png) 0 -9999em no-repeat;}
+.sprite{background: url(/static/img/sprite.png) 0 -9999em no-repeat;}
+.icon{background: url(/static/img/icon.png) 0 -9999em no-repeat;}
 
 /*头部*/
 #header {width: 980px;margin: 150px auto 0;word-break:break-all;word-wrap:break-word;}
@@ -75,8 +75,8 @@ h1 a:hover{text-decoration: none;}
 /*文章列表*/
 
 .post{height: 450px;overflow: hidden;margin: -125px 0;padding: 100px 0;word-break:break-all;word-wrap:break-word;}
-.post-left{background: url(img/tracklist.png) 0 0 no-repeat;}
-.post-right{background: url(img/tracklist.png) right -650px no-repeat;}
+.post-left{background: url(/static/img/tracklist.png) 0 0 no-repeat;}
+.post-right{background: url(/static/img/tracklist.png) right -650px no-repeat;}
 
 /*日期*/
 .post-date{width: 230px;height: 70px;margin: -100px auto 0;color: #fff;white-space: nowrap;}
@@ -147,7 +147,7 @@ h1 a:hover{text-decoration: none;}
 .block-link{display: block;width: 320px;height: 200px;}
 
 .load-more{display: block;width: 48px;height: 48px;margin: 18px auto 0;background-position: 0 -80px;cursor: pointer;}
-.loading{display: block;width: 48px;height: 48px;margin: 18px auto 0;background:url(img/loading.gif) 0 0 no-repeat;border-radius:24px;}
+.loading{display: block;width: 48px;height: 48px;margin: 18px auto 0;background:url(/static/img/loading.gif) 0 0 no-repeat;border-radius:24px;}
 .nopages{display: block;text-align: center;font:32px/40px Monotype Corsiva,'Felipa', Segoe Print, sans-serif;background: none;color: #fff;margin-top: 20px;text-shadow:0 0 5px rgba(0,0,0,0.5);}
 
 
@@ -163,12 +163,12 @@ h1 a:hover{text-decoration: none;}
 .single #wrap{width: 842px;}
 .single .post-date{margin: -280px 0 0 330px;}
 
-.article-wrap{width: 842px;margin: 60px auto 0;padding-top: 10px;background: url(img/articlebg.png) 0 0 no-repeat;}
-.article{padding: 10px 0;background: url(img/articlebg.png) -1720px 0 repeat-y;word-break:break-all;word-wrap:break-word;}
-.article-btm{clear:both;height: 10px;overflow: hidden;background: url(img/articlebg.png) -860px 0 no-repeat;}
+.article-wrap{width: 842px;margin: 60px auto 0;padding-top: 10px;background: url(/static/img/articlebg.png) 0 0 no-repeat;}
+.article{padding: 10px 0;background: url(/static/img/articlebg.png) -1720px 0 repeat-y;word-break:break-all;word-wrap:break-word;}
+.article-btm{clear:both;height: 10px;overflow: hidden;background: url(/static/img/articlebg.png) -860px 0 no-repeat;}
 
 .article .post{width: 800px;overflow: hidden;margin: 0px 21px 20px;height: auto;padding: 0;} 
-.mod-map{position: relative;width: 842px;height: 527px;top:-120px;overflow: hidden;background: url(img/tackarticle.png) 0 0 no-repeat;margin: 0 0 0 30px;}
+.mod-map{position: relative;width: 842px;height: 527px;top:-120px;overflow: hidden;background: url(/static/img/tackarticle.png) 0 0 no-repeat;margin: 0 0 0 30px;}
 
 #notes{padding: 0 10px;}
 .single .mod-tags{padding: 0 10px;}
