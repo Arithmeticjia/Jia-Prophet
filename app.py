@@ -27,8 +27,8 @@ class Article(db.Model):
     name = db.Column(db.String(50), unique=True)
 
 
-# db.drop_all()
-# db.create_all()
+# db.drop_all()     # 删除表
+# db.create_all()   # 建表
 
 
 @app.route('/')
