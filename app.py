@@ -14,6 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:980612ssj@%@101.13
 app.config['SQLALCHEMY_COMMIT_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.config['JSON_AS_ASCII'] = False
 db = SQLAlchemy(app)
 
 
@@ -26,8 +27,8 @@ class Article(db.Model):
     name = db.Column(db.String(50), unique=True)
 
 
-db.drop_all()
-db.create_all()
+# db.drop_all()
+# db.create_all()
 
 
 @app.route('/')
@@ -48,6 +49,30 @@ def predict():
         x = pd.DataFrame.from_dict(params, orient='index').transpose()
 
     return jsonify(data)
+
+
+@app.route('/detail',methods=["GET","POST"])
+def detail():
+    articles = Article.query.all()
+    print(articles)
+    model_to_dict(articles)
+    return jsonify(model_to_dict(articles))
+
+
+def model_to_dict(result):
+    from collections import Iterable
+    try:
+        if isinstance(result, Iterable):
+            tmp = [dict(zip(res.__dict__.keys(), res.__dict__.values())) for res in result]
+            for t in tmp:
+                t.pop('_sa_instance_state')
+        else:
+            tmp = dict(zip(result.__dict__.keys(), result.__dict__.values()))
+            tmp.pop('_sa_instance_state')
+        return tmp
+    except BaseException as e:
+        print(e.args)
+        raise TypeError('Type error of parameter')
 
 
 if __name__ == '__main__':
