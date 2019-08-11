@@ -1,4 +1,4 @@
-from flask import Flask,render_template
+from flask import Flask, render_template, session, redirect, url_for
 from flask import jsonify,request
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
@@ -14,7 +14,7 @@ from models import Article,ArticleView
 import pymysql
 
 app = Flask(__name__)
-admin = Admin(app=app, name='后台管理系统')
+admin = Admin(app=app, name='后台管理系统',template_mode='bootstrap3')
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:980612ssj@%@101.132.70.184:3306/JiaBlog"
 app.config['SQLALCHEMY_COMMIT_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -81,6 +81,22 @@ def model_to_dict(result):
     except BaseException as e:
         print(e.args)
         raise TypeError('Type error of parameter')
+
+
+@app.route("/login", methods=['POST','GET'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html')
+    else:
+        username = request.form.get('username')
+        password = request.form.get('password')
+        # 数据库校验，用户密码是否正确
+        if username == '妲己' and password == '123123':
+            session['user_id'] = 1
+            session['user_name'] = username
+            return redirect((url_for('first.index')))
+        else:
+            return redirect(url_for('first.new_login'))
 
 
 if __name__ == '__main__':
