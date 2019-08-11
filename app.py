@@ -1,5 +1,6 @@
 from flask import Flask,render_template
 from flask import jsonify,request
+from flask_admin import Admin
 import pandas as pd
 import numpy as np
 import tensorflow as tf
@@ -10,6 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 import pymysql
 
 app = Flask(__name__)
+admin = Admin(app=app, name='后台管理系统')
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:980612ssj@%@101.132.70.184:3306/JiaBlog"
 app.config['SQLALCHEMY_COMMIT_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
