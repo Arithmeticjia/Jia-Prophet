@@ -10,7 +10,7 @@ from sklearn.preprocessing import MinMaxScaler
 import time
 from flask_sqlalchemy import SQLAlchemy
 from exts import db
-from models import Article
+from models import Article,ArticleView
 import pymysql
 
 app = Flask(__name__)
@@ -20,8 +20,10 @@ app.config['SQLALCHEMY_COMMIT_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['JSON_AS_ASCII'] = False
+app.config['SECRET_KEY'] = '123456'
 db.init_app(app)
-admin.add_view(ModelView(Article, db.session))
+# admin.add_view(ModelView(Article, db.session))
+admin.add_view(ArticleView(Article, db.session))
 
 
 # class Article(db.Model):
