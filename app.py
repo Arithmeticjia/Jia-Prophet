@@ -1,6 +1,7 @@
 from flask import Flask,render_template
 from flask import jsonify,request
 from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 import pandas as pd
 import numpy as np
 import tensorflow as tf
@@ -8,6 +9,8 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 import time
 from flask_sqlalchemy import SQLAlchemy
+from exts import db
+from models import Article
 import pymysql
 
 app = Flask(__name__)
@@ -17,16 +20,17 @@ app.config['SQLALCHEMY_COMMIT_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['JSON_AS_ASCII'] = False
-db = SQLAlchemy(app)
+db.init_app(app)
+admin.add_view(ModelView(Article, db.session))
 
 
-class Article(db.Model):
-    # 定义表名
-    __tablename__ = 'article'
-    # 定义字段
-    # db.Column 表示是一个字段
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True)
+# class Article(db.Model):
+#     # 定义表名
+#     __tablename__ = 'article'
+#     # 定义字段
+#     # db.Column 表示是一个字段
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(50), unique=True)
 
 
 # db.drop_all()     # 删除表
