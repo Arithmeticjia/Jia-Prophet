@@ -40,7 +40,7 @@ admin.add_view(ArticleView(Article, db.session))
 
 
 @app.route('/')
-def hello_world():
+def index():
     return render_template('index.html')
 
 
@@ -94,9 +94,9 @@ def login():
         if username == '妲己' and password == '123123':
             session['user_id'] = 1
             session['user_name'] = username
-            return redirect((url_for('first.index')))
+            return redirect((url_for('index')))
         else:
-            return redirect(url_for('first.new_login'))
+            return redirect(url_for('login'))
 
 
 if __name__ == '__main__':
