@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin.contrib.sqla import ModelView
 from exts import db
+from datetime import datetime
 
 
 class Article(db.Model):
@@ -9,7 +10,9 @@ class Article(db.Model):
     # 定义字段
     # db.Column 表示是一个字段
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True)
+    title = db.Column(db.String(50), unique=True)
+    content = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 class ArticleView(ModelView):
