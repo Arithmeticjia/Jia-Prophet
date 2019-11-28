@@ -36,8 +36,12 @@ admin.add_view(ArticleView(Article, db.session))
 def index():
     return render_template('index.html')
 
-def testdb():
-    post = Article.query.filter(Article.title == "")
+
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    # show the post with the given id, the id is an integer
+    return 'Post %d' % post_id
+
 
 @app.route('/predict',methods=["GET", "POST"])
 def predict():
@@ -80,18 +84,20 @@ def model_to_dict(result):
 
 @app.route("/login", methods=['POST','GET'])
 def login():
+    error = None
     if request.method == 'GET':
         return render_template('login.html')
     else:
         username = request.form.get('username')
         password = request.form.get('password')
         # 数据库校验，用户密码是否正确
-        if username == '妲己' and password == '123123':
+        if username == 'admin' and password == 'admin':
             session['user_id'] = 1
             session['user_name'] = username
             return redirect((url_for('index')))
         else:
-            return redirect(url_for('login'))
+            error = 'Invalid username/password'
+            return render_template('login.html', error=error)
 
 
 if __name__ == '__main__':
