@@ -8,11 +8,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     JSON_AS_ASCII = False
-    SECRET_KEY  = '123456'
-
-    @property
-    def DATABASE_URI(self):         # Note: all caps
-        return 'mysql://root@980612ssj@%/JiaBlog'.format(self.DB_SERVER)
+    SECRET_KEY = '123456'
 
 
 class ProductionConfig(Config):
@@ -30,4 +26,3 @@ class TestingConfig(Config):
     """Uses testing database server."""
     DB_SERVER = 'localhost'
     DEBUG = True
-    DATABASE_URI = 'sqlite:///:memory:'
