@@ -69,6 +69,7 @@ def predict():
 
 
 @app.route('/detail',methods=["GET","POST"])
+@login_required
 def detail():
     articles = Article.query.all()
     print(articles)
@@ -125,7 +126,8 @@ def login():
         if user:
             # 将用户信息注册到flask-login中
             login_user(user)
-            return redirect(url_for('index'))
+            next = request.args.get('next')
+            return redirect(next or url_for('index'))
         else:
             flash("用户名或密码错误")
     return render_template('login.html', form=form)
