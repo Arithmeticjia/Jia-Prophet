@@ -28,15 +28,6 @@ db.init_app(app)
 admin.add_view(ArticleView(Article, db.session))
 
 
-# class Article(db.Model):
-#     # 定义表名
-#     __tablename__ = 'article'
-#     # 定义字段
-#     # db.Column 表示是一个字段
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(50), unique=True)
-
-
 # db.drop_all()     # 删除表
 # db.create_all()   # 建表
 

@@ -3,7 +3,15 @@ class Config(object):
     DEBUG = False
     TESTING = False
     DB_SERVER = '127.0.0.1'
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:980612ssj@%@101.132.70.184:3306/JiaBlog"
+    DIALECT = 'mysql'               # 数据库类型
+    DRIVER = 'pymysql'              # 连接数据库驱动
+    USERNAME = 'root'               # 用户名
+    PASSWORD = '980612ssj@%'        # 密码
+    HOST = '101.132.70.184'         # 服务器
+    PORT = '3306'                   # 端口
+    DATABASE = 'JiaBlog'            # 数据库名
+    SQLALCHEMY_DATABASE_URI = "{}+{}://{}:{}@{}:{}/{}?charset=utf8".format(DIALECT, DRIVER, USERNAME, PASSWORD, HOST,PORT, DATABASE)
+    # SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:980612ssj@%@101.132.70.184:3306/JiaBlog"
     SQLALCHEMY_COMMIT_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
