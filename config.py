@@ -1,6 +1,6 @@
 class Config(object):
     """Base config, uses staging database server."""
-    DEBUG = True
+    DEBUG = False
     TESTING = False
     DB_SERVER = '127.0.0.1'
     SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:980612ssj@%@101.132.70.184:3306/JiaBlog"
