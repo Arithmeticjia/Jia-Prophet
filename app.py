@@ -1,5 +1,6 @@
-from flask import Flask, render_template, session, redirect, url_for
+from flask import Flask, render_template, session, redirect, url_for,flash
 import config
+from forms import LoginForm
 from flask import jsonify,request
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
@@ -11,7 +12,9 @@ from sklearn.preprocessing import MinMaxScaler
 import time
 from flask_sqlalchemy import SQLAlchemy
 from exts import db
-from models import Article,ArticleView
+from models import Article,ArticleView,User,UserView
+from flask_login import login_user,logout_user,login_required,LoginManager,current_user
+
 import pymysql
 
 app = Flask(__name__)
@@ -26,13 +29,20 @@ app.config.from_object("config.DevelopmentConfig")  # 加载配置文件
 db.init_app(app)
 # admin.add_view(ModelView(Article, db.session))
 admin.add_view(ArticleView(Article, db.session))
+admin.add_view(UserView(User, db.session))
 
 
 # db.drop_all()     # 删除表
 # db.create_all()   # 建表
 
+login_manager=LoginManager()
+login_manager.session_protection='strong'   # 认证加密程度
+login_manager.login_view='login'            # 处理登录的视图函数
+login_manager.login_message='请登录'         # 登陆提示信息
+login_manager.init_app(app)
 
 @app.route('/')
+@login_required
 def index():
     return render_template('index.html')
 
@@ -82,22 +92,49 @@ def model_to_dict(result):
         raise TypeError('Type error of parameter')
 
 
-@app.route("/login", methods=['POST','GET'])
+# @app.route("/login", methods=['POST', 'GET'])
+# def login():
+#     error = None
+#     if request.method == 'GET':
+#         return render_template('login.html')
+#     else:
+#         username = request.form.get('username')
+#         password = request.form.get('password')
+#         # 数据库校验，用户密码是否正确
+#         if username == 'admin' and password == 'admin':
+#             session['user_id'] = 1
+#             session['user_name'] = username
+#             return redirect((url_for('index')))
+#         else:
+#             error = 'Invalid username/password'
+#             return render_template('login.html', error=error)
+
+@login_manager.user_loader
+def load_user(user_id):
+    print(user_id)  # 登录成功的时候会自动获取主键id
+    return User.query.filter_by(id=user_id).first()
+
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
-    if request.method == 'GET':
-        return render_template('login.html')
-    else:
+    form = LoginForm()  # 实例化form对象
+    if request.method == "POST" and form.validate_on_submit():
         username = request.form.get('username')
         password = request.form.get('password')
-        # 数据库校验，用户密码是否正确
-        if username == 'admin' and password == 'admin':
-            session['user_id'] = 1
-            session['user_name'] = username
-            return redirect((url_for('index')))
+        user = User.query.filter_by(name=username, password=password).first()
+        if user:
+            # 将用户信息注册到flask-login中
+            login_user(user)
+            return redirect(url_for('index'))
         else:
-            error = 'Invalid username/password'
-            return render_template('login.html', error=error)
+            flash("用户名或密码错误")
+    return render_template('login.html', form=form)
+
+
+@app.route('/logout',methods=['GET'])
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 
 if __name__ == '__main__':
