@@ -43,6 +43,12 @@ login_manager.login_view='login'            # 处理登录的视图函数
 login_manager.login_message='请登录'         # 登陆提示信息
 login_manager.init_app(app)
 
+
+@app.errorhandler(404)
+def miss(e):
+    return render_template('404.html'), 404
+
+
 @app.route('/')
 # @login_required
 def index():
