@@ -44,7 +44,7 @@ login_manager.login_message='请登录'         # 登陆提示信息
 login_manager.init_app(app)
 
 @app.route('/')
-@login_required
+# @login_required
 def index():
     return render_template('index.html')
 
