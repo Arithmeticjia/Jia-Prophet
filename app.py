@@ -44,9 +44,10 @@ login_manager.login_message='请登录'         # 登陆提示信息
 login_manager.init_app(app)
 
 
-@app.errorhandler(404)
-def miss(e):
-    return render_template('404.html'), 404
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("index.html")
 
 
 @app.route('/')
