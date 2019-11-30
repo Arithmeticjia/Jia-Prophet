@@ -1,4 +1,5 @@
 from flask import Flask, render_template, session, redirect, url_for,flash
+from flask_restful import Api,Resource
 import config
 from forms import LoginForm
 from flask import jsonify,request
@@ -18,6 +19,7 @@ from flask_login import login_user,logout_user,login_required,LoginManager,curre
 import pymysql
 
 app = Flask(__name__)
+api = Api(app)
 admin = Admin(app=app, name='后台管理系统',template_mode='bootstrap3')
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:980612ssj@%@101.132.70.184:3306/JiaBlog"
 # app.config['SQLALCHEMY_COMMIT_TEARDOWN'] = True
@@ -136,6 +138,44 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+
+@api.resource('/API/V1/blog')
+class BlogApi(Resource):
+    def __init__(self):
+        super().__init__()
+        self.result = {
+            'method':'',
+            'vaesion': 'v1',
+            'data':'',
+        }
+
+    # 定义返回的数据
+    def create_data(self, blog):
+        result_data = {
+            'request_id': blog.id,
+            'request_title': blog.title,
+            'request_content':blog.content,
+        }
+        return result_data
+
+    def get(self):
+        data = request.args
+        id = data.get('id')
+        result_data = {}
+        if id:
+            leave = Article.query.get(int(id))
+            if leave is not None:
+                result_data = self.create_data(leave)
+        else:
+            blogs = Article.query.all()
+            result_data = []
+            for leave in blogs:
+                one = self.create_data(leave)
+                result_data.append(one)
+        self.result['method'] = 'get'
+        self.result['data'] = result_data
+        return jsonify(self.result)
 
 
 if __name__ == '__main__':
