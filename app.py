@@ -153,9 +153,9 @@ class BlogApi(Resource):
     # 定义返回的数据
     def create_data(self, blog):
         result_data = {
-            'request_id': blog.id,
-            'request_title': blog.title,
-            'request_content':blog.content,
+            'id': blog.id,
+            'title': blog.title,
+            'content':blog.content,
         }
         return result_data
 
