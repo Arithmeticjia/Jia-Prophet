@@ -16,9 +16,9 @@
 <!--            <li><a href="#about">About</a></li>-->
 <!--            <li><a href="#contact">Contact</a></li>-->
 <!--          </ul>-->
-<!--        </div>&lt;!&ndash; /.nav-collapse &ndash;&gt;-->
-<!--      </div>&lt;!&ndash; /.container &ndash;&gt;-->
-<!--    </nav>&lt;!&ndash; /.navbar &ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </nav>-->
 
   <div class="container">
 
@@ -73,7 +73,9 @@
 </template>
 
 <script>
+
     import axios from 'axios';
+    import 'bootstrap/dist/js/bootstrap.min.js'
 
     export default {
         name: "Archive",
