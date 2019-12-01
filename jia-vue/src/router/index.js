@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import About from "@/components/About";
 import NotFound from "@/components/NotFound";
 import Home from "@/components/Home";
+import Archive from "@/components/Archive";
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/archive',
+      name: 'Archive',
+      component: Archive
     },
   ],
   mode: 'history',

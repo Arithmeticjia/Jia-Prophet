@@ -82,8 +82,8 @@ def predict():
     return jsonify(data)
 
 
-@app.route('/api/blogdetail',methods=["GET","POST"])
-@login_required
+@app.route('/api/bloglist',methods=["GET","POST"])
+# @login_required
 def blogdetail():
     articles = Article.query.all()
     model_to_dict(articles)     # list
