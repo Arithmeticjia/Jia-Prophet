@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import About from "@/components/About";
 import NotFound from "@/components/NotFound";
+import Home from "@/components/Home";
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '*',
       name: 'NotFound',
       component: NotFound
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
     },
   ],
   mode: 'history',
