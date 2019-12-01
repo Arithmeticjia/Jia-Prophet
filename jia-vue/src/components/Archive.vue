@@ -113,7 +113,7 @@
 </script>
 
 <style scoped>
-  @import '../assets/dist/css/bootstrap.min.css';
-  @import '../assets/dist/css/bootstrap.css';
-  @import '../assets/dist/css/offcanvas.css';
+  /*@import '../assets/dist/css/bootstrap.min.css';*/
+  /*@import '../assets/dist/css/bootstrap.css';*/
+  /*@import '../assets/dist/css/offcanvas.css';*/
 </style>
