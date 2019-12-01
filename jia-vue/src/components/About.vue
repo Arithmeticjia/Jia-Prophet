@@ -9,7 +9,7 @@
         name: "About",
         data() {
           return {
-            msg: 'Hello!',
+            msg: 'Hello! My name is 单沙嘉',
           };
       },
     }

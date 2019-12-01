@@ -50,6 +50,11 @@ def catch_all(path):
     return render_template("index.html")
 
 
+@app.route('/about')
+def about():
+    return render_template('index.html')
+
+
 @app.route('/')
 # @login_required
 def index():
