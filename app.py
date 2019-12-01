@@ -6,6 +6,7 @@ from flask import jsonify,request
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 import pandas as pd
+from flask_cors import *
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
@@ -19,6 +20,7 @@ from flask_login import login_user,logout_user,login_required,LoginManager,curre
 import pymysql
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 api = Api(app)
 admin = Admin(app=app, name='后台管理系统',template_mode='bootstrap3')
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:980612ssj@%@101.132.70.184:3306/JiaBlog"

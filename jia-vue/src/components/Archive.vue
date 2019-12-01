@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="columns medium-3" v-for="blog in list">
+    <div class="column" v-for="blog in list">
         <div class="card">
           <div class="card-divider">
-            {{ blog.title }}
+              {{ blog.title }}
           </div>
           <div class="card-section">
             <p>{{ blog.content }}.</p>
@@ -46,5 +46,9 @@
 </script>
 
 <style scoped>
-
+  /* 创建三个相等的列 */
+.column {
+  float: left;
+  width: 33.33%;
+}
 </style>
