@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="column" v-for="blog in list">
+    <div class="column" v-for="blog in bloglist">
           <h2>
             {{ blog.title }}
           </h2>
             <p>{{ blog.content }}.</p>
     </div>
-      <button @click="getData">GET DATA</button>
+<!--      <button @click="getData">GET DATA</button>-->
   </div>
 </template>
 
@@ -17,8 +17,14 @@
         name: "Archive",
         data: function() {
             return {
-              list: []
+              bloglist: []
             }
+        },
+        created(){
+            var that = this;
+            axios.get('http://127.0.0.1:5000/api/bloglist').then(function (response) {
+                that.bloglist = response.data;
+            })
         },
         methods: {
           getData() {
