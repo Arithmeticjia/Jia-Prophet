@@ -1,14 +1,10 @@
 <template>
   <div>
     <div class="column" v-for="blog in list">
-        <div class="card">
-          <div class="card-divider">
-              {{ blog.title }}
-          </div>
-          <div class="card-section">
+          <h2>
+            {{ blog.title }}
+          </h2>
             <p>{{ blog.content }}.</p>
-          </div>
-        </div>
     </div>
       <button @click="getData">GET DATA</button>
   </div>
