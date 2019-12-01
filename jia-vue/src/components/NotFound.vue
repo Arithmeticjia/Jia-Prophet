@@ -1,12 +1,17 @@
 <template>
   <div>
-    <p>404 - Not Found</p>
+    <p>{{ msg }}</p>
   </div>
 </template>
 
 <script>
     export default {
-        name: "NotFound"
+        name: "NotFound",
+        data() {
+          return {
+            msg: '404 - Not Found',
+          };
+      },
     }
 </script>
 
