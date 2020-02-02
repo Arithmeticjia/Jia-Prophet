@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, redirect, url_for,flash
 from flask_restful import Api,Resource
 import config
 from forms import LoginForm
-from flask import jsonify,request
+from flask import jsonify, request
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 import pandas as pd
@@ -15,7 +15,7 @@ import time
 from flask_sqlalchemy import SQLAlchemy
 from exts import db
 from models import Article, ArticleView, User, UserView, Me, Experience, Award, MeView, ExperienceView, AwardView
-from flask_login import login_user,logout_user,login_required,LoginManager,current_user
+from flask_login import login_user, logout_user, login_required, LoginManager, current_user
 
 import pymysql
 
@@ -63,7 +63,8 @@ def about():
 @app.route('/')
 # @login_required
 def index():
-    return render_template('index.html')
+    awards = db.session.query(Award).all()
+    return render_template('index.html', awards=awards)
 
 
 @app.route('/post/<int:post_id>')
