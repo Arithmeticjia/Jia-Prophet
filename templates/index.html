@@ -18,6 +18,9 @@
 			/* Edit this with your name or anything else */
 			content: 'DRACO';
 		}
+        h1{
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
 	</style>
 </head>
 <body>
@@ -65,7 +68,7 @@
             {% for i in awards %}
 			<ul class="work-list">
 				<li>{{ i.time }}</li>
-				<li><a href="#">PT Traveloka Indonesia</a></li>
+				<li><a href="#">{{ i.awardname }}</a></li>
 				<li>Web Designer</li>
 			</ul>
             {% endfor %}
