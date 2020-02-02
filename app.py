@@ -14,7 +14,7 @@ from sklearn.preprocessing import MinMaxScaler
 import time
 from flask_sqlalchemy import SQLAlchemy
 from exts import db
-from models import Article,ArticleView,User,UserView
+from models import Article, ArticleView, User, UserView, Me, Experience, Award, MeView, ExperienceView, AwardView
 from flask_login import login_user,logout_user,login_required,LoginManager,current_user
 
 import pymysql
@@ -34,6 +34,9 @@ db.init_app(app)
 # admin.add_view(ModelView(Article, db.session))
 admin.add_view(ArticleView(Article, db.session))
 admin.add_view(UserView(User, db.session))
+admin.add_view(UserView(Me, db.session))
+admin.add_view(UserView(Experience, db.session))
+admin.add_view(UserView(Award, db.session))
 
 
 # db.drop_all()     # 删除表

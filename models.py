@@ -65,3 +65,47 @@ class UserView(ModelView):
     can_create = True   # 可以创建数据  False
     can_delete = True   # 可以删除数据  False
     can_edit = True     # 可以编辑数据  False
+
+
+class MeView(ModelView):
+    can_create = True   # 可以创建数据  False
+    can_delete = True   # 可以删除数据  False
+    can_edit = True     # 可以编辑数据  False
+
+
+class ExperienceView(ModelView):
+    can_create = True   # 可以创建数据  False
+    can_delete = True   # 可以删除数据  False
+    can_edit = True     # 可以编辑数据  False
+
+
+class AwardView(ModelView):
+    can_create = True   # 可以创建数据  False
+    can_delete = True   # 可以删除数据  False
+    can_edit = True     # 可以编辑数据  False
+
+
+class Me(db.Model):
+    # 定义表名
+    __tablename__ = 'me'
+    # 定义字段
+    # db.Column 表示是一个字段
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20), unique=True)
+    content = db.Column(db.Text)
+
+
+class Experience(db.Model):
+    __tablename__ = 'experience'
+    id = db.Column(db.Integer, primary_key=True)
+    companyname = db.Column(db.String(30), unique=True)
+    begintime = db.Column(db.Date)
+    endtime = db.Column(db.Date)
+
+
+class Award(db.Model):
+    __tablename__ = 'award'
+    id = db.Column(db.Integer, primary_key=True)
+    awardname = db.Column(db.Text)
+    time = db.Column(db.Date)
+
