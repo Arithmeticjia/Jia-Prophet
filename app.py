@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for,flash
+from flask import Flask, render_template, session, redirect, url_for, flash
 from flask_restful import Api, Resource
 import config
 from forms import LoginForm
@@ -49,10 +49,10 @@ login_manager.login_message = '请登录'         # 登陆提示信息
 login_manager.init_app(app)
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    return render_template("index.html")
+# @app.route('/', defaults={'path': ''})
+# @app.route('/<path:path>')
+# def catch_all(path):
+#     return render_template("index.html")
 
 
 @app.route('/about')
@@ -88,7 +88,7 @@ def predict():
     return jsonify(data)
 
 
-@app.route('/api/bloglist',methods=["GET", "POST"])
+@app.route('/api/bloglist', methods=["GET", "POST"])
 # @login_required
 def bloglist():
     articles = Article.query.all()
@@ -152,13 +152,13 @@ def login():
     return render_template('login.html', form=form)
 
 
-@app.route('/logout',methods=['GET'])
+@app.route('/logout', methods=['GET'])
 def logout():
     logout_user()
     return redirect(url_for('login'))
 
 
-@api.resource('/API/V1/blog')
+@api.resource('/api/v1/blog')
 class BlogApi(Resource):
     def __init__(self):
         super().__init__()
@@ -184,7 +184,61 @@ class BlogApi(Resource):
         if id:
             leave = Article.query.get(int(id))
             if leave is not None:
-                result_data = self.create_data(leave)
+                try:
+                    result_data = self.create_data(leave)
+                    self.result["code"] = 200
+                except:
+                    self.result["code"] = 400
+        else:
+            try:
+                blogs = Article.query.all()
+                result_data = []
+                for leave in blogs:
+                    one = self.create_data(leave)
+                    result_data.append(one)
+                self.result["code"] = 200
+            except:
+                self.result["code"] = 400
+        self.result['method'] = 'get'
+        self.result['data'] = result_data
+        return jsonify(self.result)
+
+
+@api.resource('/api/v1/blog/<int:post_id>')
+class BlogSingleApi(Resource):
+    def __init__(self):
+        super().__init__()
+        self.result = {
+            'method': '',
+            'version': 'v1',
+            'data': '',
+        }
+
+    # 定义返回的数据
+    def create_data(self, blog):
+        result_data = {
+            'id': blog.id,
+            'title': blog.title,
+            'content': blog.content,
+        }
+        return result_data
+
+    def get(self, post_id):
+        """
+        从数据库中获取数据
+        :return: 返回获取到的数据，200：获取成功，400：获取失败
+        """
+        result_data = {}
+        if post_id:
+            leave = Article.query.get(int(post_id))
+            if leave is not None:
+                try:
+                    result_data = self.create_data(leave)
+                    self.result["code"] = 200
+                except:
+                    self.result["code"] = 400
+            else:
+                self.result["code"] = "该文章不存在"
         else:
             blogs = Article.query.all()
             result_data = []
@@ -193,6 +247,33 @@ class BlogApi(Resource):
                 result_data.append(one)
         self.result['method'] = 'get'
         self.result['data'] = result_data
+        return jsonify(self.result)
+
+    def delete(self, post_id):
+        """
+        负责删除数据
+        :return: 返回数据保存的状态，200：保存成功，400：保存失败
+        """
+        self.result["method"] = "delete"
+        if post_id:
+            leave = Article.query.get(int(post_id))
+            if leave is not None:
+                try:
+                    db.session.delete(leave)
+                    db.session.commit()
+                    self.result["code"] = 200
+                except:
+                    self.result["code"] = 400
+            else:
+                self.result["code"] = 400
+                self.result["msg"] = "该文章不存在"
+        else:
+            blogs = Article.query.all()
+            result_data = []
+            for leave in blogs:
+                one = self.create_data(leave)
+                result_data.append(one)
+
         return jsonify(self.result)
 
 
