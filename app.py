@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, redirect, url_for,flash
-from flask_restful import Api,Resource
+from flask_restful import Api, Resource
 import config
 from forms import LoginForm
 from flask import jsonify, request
@@ -22,7 +22,7 @@ import pymysql
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 api = Api(app)
-admin = Admin(app=app, name='后台管理系统',template_mode='bootstrap3')
+admin = Admin(app=app, name='后台管理系统', template_mode='bootstrap3')
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:980612ssj@%@101.132.70.184:3306/JiaBlog"
 # app.config['SQLALCHEMY_COMMIT_TEARDOWN'] = True
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -42,10 +42,10 @@ admin.add_view(UserView(Award, db.session))
 # db.drop_all()     # 删除表
 # db.create_all()   # 建表
 
-login_manager=LoginManager()
-login_manager.session_protection='strong'   # 认证加密程度
-login_manager.login_view='login'            # 处理登录的视图函数
-login_manager.login_message='请登录'         # 登陆提示信息
+login_manager = LoginManager()
+login_manager.session_protection ='strong'    # 认证加密程度
+login_manager.login_view ='login'             # 处理登录的视图函数
+login_manager.login_message = '请登录'         # 登陆提示信息
 login_manager.init_app(app)
 
 
@@ -73,7 +73,7 @@ def show_post(post_id):
     return 'Post %d' % post_id
 
 
-@app.route('/predict',methods=["GET", "POST"])
+@app.route('/predict', methods=["GET", "POST"])
 def predict():
     data = {"success": False}
 
@@ -88,7 +88,7 @@ def predict():
     return jsonify(data)
 
 
-@app.route('/api/bloglist',methods=["GET","POST"])
+@app.route('/api/bloglist',methods=["GET", "POST"])
 # @login_required
 def bloglist():
     articles = Article.query.all()
@@ -163,9 +163,9 @@ class BlogApi(Resource):
     def __init__(self):
         super().__init__()
         self.result = {
-            'method':'',
+            'method': '',
             'vaesion': 'v1',
-            'data':'',
+            'data': '',
         }
 
     # 定义返回的数据
@@ -173,7 +173,7 @@ class BlogApi(Resource):
         result_data = {
             'id': blog.id,
             'title': blog.title,
-            'content':blog.content,
+            'content': blog.content,
         }
         return result_data
 
