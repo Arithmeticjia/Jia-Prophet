@@ -30,6 +30,7 @@ admin = Admin(app=app, name='后台管理系统', template_mode='bootstrap3')
 # app.config['JSON_AS_ASCII'] = False
 # app.config['SECRET_KEY'] = '123456'
 app.config.from_object("config.DevelopmentConfig")  # 加载配置文件
+app.config['JSON_AS_ASCII'] = False
 db.init_app(app)
 # admin.add_view(ModelView(Article, db.session))
 admin.add_view(ArticleView(Article, db.session))
