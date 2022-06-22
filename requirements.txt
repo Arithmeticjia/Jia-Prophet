@@ -7,7 +7,7 @@ Flask_RESTful==0.3.7
 Flask_SQLAlchemy==2.4.0
 Flask_Migrate==2.5.2
 SQLAlchemy==1.2.12
-numpy==1.17.2
+numpy==1.22.0
 Flask_Script==2.0.6
 Flask_Admin==1.5.3
 WTForms==2.2.1
